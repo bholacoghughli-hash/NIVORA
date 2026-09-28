@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">NIVORA</string>
+    <string name="app_tagline">Search Freely. Browse Privately.</string>
+    <string name="developer_credit">Created by Bhaskar Gautam</string>
+    <string name="developed_by">Developed by Bhaskar</string>
+    <string name="shortcut_new_tab">New Tab</string>
+    <string name="shortcut_new_tab_desc">Open a new web tab</string>
+    <string name="shortcut_private_tab">Private Tab</string>
+    <string name="shortcut_private_tab_desc">Open an incognito private tab</string>
+    <string name="shortcut_qr">QR Scanner</string>
+    <string name="shortcut_qr_desc">Scan a QR code</string>
+    <string name="shortcut_downloads">Downloads</string>
+    <string name="shortcut_downloads_desc">View downloaded files</string>
+</resources>

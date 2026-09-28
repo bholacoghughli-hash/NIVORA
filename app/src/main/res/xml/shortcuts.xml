@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="shortcut_new_tab"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:shortcutShortLabel="@string/shortcut_new_tab"
+        android:shortcutLongLabel="@string/shortcut_new_tab_desc">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example"
+            android:targetClass="com.example.MainActivity"
+            android:data="nivora://shortcut/new_tab" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="shortcut_private_tab"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:shortcutShortLabel="@string/shortcut_private_tab"
+        android:shortcutLongLabel="@string/shortcut_private_tab_desc">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example"
+            android:targetClass="com.example.MainActivity"
+            android:data="nivora://shortcut/private_tab" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="shortcut_qr_scanner"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:shortcutShortLabel="@string/shortcut_qr"
+        android:shortcutLongLabel="@string/shortcut_qr_desc">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example"
+            android:targetClass="com.example.MainActivity"
+            android:data="nivora://shortcut/qr_scanner" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="shortcut_downloads"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:shortcutShortLabel="@string/shortcut_downloads"
+        android:shortcutLongLabel="@string/shortcut_downloads_desc">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example"
+            android:targetClass="com.example.MainActivity"
+            android:data="nivora://shortcut/downloads" />
+    </shortcut>
+</shortcuts>

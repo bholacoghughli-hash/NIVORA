@@ -1,0 +1,6 @@
+{
+  "name": "NIVORA",
+  "description": "NIVORA Ultimate Android Browser - Search Freely. Browse Privately. Created by Bhaskar Gautam.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
