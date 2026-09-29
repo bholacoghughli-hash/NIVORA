@@ -31,7 +31,7 @@ jobs:
           gradle-version: '8.11.1'
 
       - name: Build NIVORA Debug APK
-        run: gradle :app:assembleDebug --no-daemon --stacktrace
+        run: gradle :app:assembleDebug --no-daemon
 
       - name: Upload NIVORA APK
         uses: actions/upload-artifact@v4
