@@ -25,18 +25,13 @@ jobs:
           java-version: '17'
           cache: gradle
 
-      - name: Set up Gradle 9.3.7
+      - name: Set up Gradle 8.11.1
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '9.3.7'
-
-      - name: Generate and Update Wrapper to 9.3.7
-        run: |
-          gradle wrapper --gradle-version 9.3.7
-          chmod +x gradlew
+          gradle-version: '8.11.1'
 
       - name: Build NIVORA Debug APK
-        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
+        run: gradle :app:assembleDebug --no-daemon --stacktrace
 
       - name: Upload NIVORA APK
         uses: actions/upload-artifact@v4
