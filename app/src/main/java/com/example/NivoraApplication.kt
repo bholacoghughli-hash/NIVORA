@@ -31,7 +31,7 @@ class NivoraApplication : Application() {
     val cookieSiteDataManager by lazy { CookieSiteDataManager(this, browserRepository) }
     val safeBrowsingProvider: SafeBrowsingProvider by lazy { DefaultSafeBrowsingProvider() }
     val biometricLockManager by lazy { BiometricLockManager(this) }
-    val aiProvider by lazy { com.nivora.browser.ai.GeminiAIProvider() }
+    val aiProvider by lazy { com.nivora.browser.ai.LocalHeuristicAIProvider() }
     val webAppManager by lazy { com.nivora.browser.webapps.WebAppManager(this) }
     val syncManager by lazy { com.nivora.browser.sync.SyncManager(this, browserRepository, settingsRepository) }
 
