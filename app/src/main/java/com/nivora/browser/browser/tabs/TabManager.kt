@@ -61,7 +61,11 @@ class TabManager(
     val canReopenClosedTab: StateFlow<Boolean> = _canReopenClosedTab.asStateFlow()
 
     init {
+    try {
         createTab(url = "", isIncognito = false)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
     }
 
     fun createTab(
