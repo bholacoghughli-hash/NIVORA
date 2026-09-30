@@ -1,11 +1,8 @@
-import com.google.gms.googleservices.GoogleServicesPlugin.MissingGoogleServicesStrategy
-
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.google.devtools.ksp)
   alias(libs.plugins.secrets)
-  alias(libs.plugins.google.services)
 }
 
 android {
@@ -40,25 +37,19 @@ android {
     buildConfig = true
   }
 
-  testOptions { unitTests { isIncludeAndroidResources = true } }
   dependenciesInfo {
     includeInApk = false
     includeInBundle = true
   }
 }
 
-// Configure the Secrets Gradle Plugin to use .env and .env.example files
 secrets {
   propertiesFileName = ".env"
   defaultPropertiesFileName = ".env.example"
-  ignoreList.add("FIREBASE_APPCHECK_DEBUG_TOKEN")
 }
-
-googleServices { missingGoogleServicesStrategy = MissingGoogleServicesStrategy.WARN }
 
 dependencies {
   implementation(platform(libs.androidx.compose.bom))
-  implementation(platform(libs.firebase.bom))
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.compose.material.icons.core)
   implementation(libs.androidx.compose.material.icons.extended)
@@ -76,27 +67,12 @@ dependencies {
   implementation(libs.androidx.room.runtime)
   implementation(libs.coil.compose)
   implementation(libs.converter.moshi)
-  implementation(libs.firebase.ai)
-  implementation(libs.firebase.appcheck.recaptcha)
-  implementation(libs.firebase.appcheck.debug)
   implementation(libs.kotlinx.coroutines.android)
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.logging.interceptor)
   implementation(libs.moshi.kotlin)
   implementation(libs.okhttp)
   implementation(libs.retrofit)
-  testImplementation(libs.androidx.compose.ui.test.junit4)
-  testImplementation(libs.androidx.core)
-  testImplementation(libs.androidx.junit)
-  testImplementation(libs.junit)
-  testImplementation(libs.kotlinx.coroutines.test)
-  testImplementation(libs.robolectric)
-  androidTestImplementation(platform(libs.androidx.compose.bom))
-  androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-  androidTestImplementation(libs.androidx.espresso.core)
-  androidTestImplementation(libs.androidx.junit)
-  androidTestImplementation(libs.androidx.runner)
-  debugImplementation(libs.androidx.compose.ui.test.manifest)
   debugImplementation(libs.androidx.compose.ui.tooling)
   "ksp"(libs.androidx.room.compiler)
   "ksp"(libs.moshi.kotlin.codegen)
