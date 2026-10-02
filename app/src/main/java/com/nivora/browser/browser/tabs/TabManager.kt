@@ -42,30 +42,22 @@ class TabManager(
     private val _activeTabId = MutableStateFlow<String?>(null)
     val activeTabId: StateFlow<String?> = _activeTabId.asStateFlow()
 
-    private val _tabGroups = MutableStateFlow<List<TabGroup>>(
-        listOf(
-            TabGroup(id = "group_personal", name = "Personal", colorHex = "#0284C7"),
-            TabGroup(id = "group_study", name = "Study", colorHex = "#10B981"),
-            TabGroup(id = "group_research", name = "Research", colorHex = "#8B5CF6"),
-            TabGroup(id = "group_work", name = "Work", colorHex = "#F59E0B")
-        )
-    )
+    private val _tabGroups = MutableStateFlow<List<TabGroup>>(emptyList())
     val tabGroups: StateFlow<List<TabGroup>> = _tabGroups.asStateFlow()
 
     private val _selectedGroupFilter = MutableStateFlow<String?>(null)
     val selectedGroupFilter: StateFlow<String?> = _selectedGroupFilter.asStateFlow()
 
-    // Recently closed tabs stack (LIFO)
     private val closedTabsStack = ArrayDeque<ClosedTabRecord>()
     private val _canReopenClosedTab = MutableStateFlow(false)
     val canReopenClosedTab: StateFlow<Boolean> = _canReopenClosedTab.asStateFlow()
 
     init {
-    try {
-        createTab(url = "", isIncognito = false)
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
+        try {
+            createTab(url = "", isIncognito = false)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     fun createTab(
@@ -75,6 +67,7 @@ class TabManager(
     ): BrowserTab {
         val tabId = UUID.randomUUID().toString()
         val app = context.applicationContext as? com.example.NivoraApplication
+
         val engine = AndroidWebViewEngine(context, isIncognito = isIncognito) { loadedUrl, title ->
             _tabs.update { currentTabs ->
                 currentTabs.map { tab ->
@@ -128,7 +121,6 @@ class TabManager(
         val currentList = _tabs.value
         val tabToClose = currentList.find { it.id == id } ?: return
 
-        // Push to recently closed stack if non-blank
         if (tabToClose.url.isNotBlank() && !tabToClose.url.startsWith("about:")) {
             closedTabsStack.addLast(
                 ClosedTabRecord(
@@ -142,14 +134,11 @@ class TabManager(
         }
 
         tabToClose.engine.destroy()
-
         val updated = currentList.filterNot { it.id == id }
         _tabs.value = updated
-
         if (_activeTabId.value == id) {
             _activeTabId.value = updated.lastOrNull()?.id
         }
-
         if (updated.isEmpty()) {
             createTab()
         }
@@ -191,7 +180,6 @@ class TabManager(
         return _tabs.value.find { it.id == currentId } ?: _tabs.value.firstOrNull()
     }
 
-    // Tab Groups
     fun setGroupFilter(groupId: String?) {
         _selectedGroupFilter.value = groupId
     }
@@ -216,7 +204,6 @@ class TabManager(
 
     fun deleteGroup(groupId: String) {
         _tabGroups.update { list -> list.filterNot { it.id == groupId } }
-        // Ungroup tabs that were part of this group
         _tabs.update { list ->
             list.map { if (it.groupId == groupId) it.copy(groupId = null) else it }
         }
